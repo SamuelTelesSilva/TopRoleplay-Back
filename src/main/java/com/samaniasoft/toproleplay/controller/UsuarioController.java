@@ -54,7 +54,7 @@ public class UsuarioController {
 
     // ---------------------Put--------------------------------------
     @PutMapping("/{id}")
-    //@Secured({"ROLE_USER"})
+    @Secured({"ROLE_USER","ROLE_ADMIN"})
     public ResponseEntity put(@PathVariable("id") Long id, @RequestBody Usuario usuario) {
         usuario.setId(id);
         UsuarioDTO c = usuarioService.update(usuario, id);
