@@ -11,6 +11,7 @@ import com.samaniasoft.toproleplay.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
@@ -30,6 +31,7 @@ public class UsuarioService {
         return UsuarioDTO.createUser(usuarioRepository.save(user));
     }
 
+    //variavel que recebe a senha anterior
     private String senhaAnteriorBancoDados;
 
     public UsuarioDTO update(Usuario user, Long id) {
@@ -38,19 +40,22 @@ public class UsuarioService {
         // Busca o usuario no banco de dados
         Optional<Usuario> optional = usuarioRepository.findById(id);
         if(optional.isPresent()) {
+
+            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();  
+            
+
             Usuario db = optional.get();
             
             //Estou pegando a senha atual do banco de dados e colocando nesta variavel;
             senhaAnteriorBancoDados = db.getPassword();
 
             //Estou comparando as duas Strings/senhas, se a senha do banco for igual a senha digitada pelo usuario
-            if(senhaAnteriorBancoDados.equals(user.getSenhaAnterior())){
+            if(encoder.matches(user.getSenhaAnterior(), senhaAnteriorBancoDados)){
                 
                 // Copiar as propriedades
                 db.setUrlAvatar(user.getUrlAvatar());
                 db.setNome(user.getNome());
                 db.setIdade(user.getIdade());
-                db.setEmail(user.getUsername());
                 db.setSenha(user.getPassword());
 
                 // Atualiza o usuario

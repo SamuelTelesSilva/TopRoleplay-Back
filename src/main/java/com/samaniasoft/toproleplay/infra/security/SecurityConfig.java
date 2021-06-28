@@ -1,5 +1,6 @@
 package com.samaniasoft.toproleplay.infra.security;
 
+import com.samaniasoft.toproleplay.cors.CorsConfig;
 import com.samaniasoft.toproleplay.infra.security.jwt.JwtAuthenticationFilter;
 import com.samaniasoft.toproleplay.infra.security.jwt.JwtAuthorizationFilter;
 import com.samaniasoft.toproleplay.infra.security.jwt.handler.AccessDeniedHandler;
@@ -49,6 +50,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
                 .and().cors()
                 .and().csrf().disable()
+                .addFilter(new CorsConfig())
                 .addFilter(new JwtAuthenticationFilter(authManager))
                 .addFilter(new JwtAuthorizationFilter(authManager, userDetailsService))
                 .exceptionHandling()
