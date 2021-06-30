@@ -53,8 +53,6 @@ public class UsuarioService {
             //Estou comparando as duas Strings/senhas, se a senha do banco for igual a senha digitada pelo usuario
             if(encoder.matches(user.getSenhaAnterior(), senhaAnteriorBancoDados)){
                 
-                // Copiar as propriedades
-                db.setUrlAvatar(user.getUrlAvatar());
                 db.setNome(user.getNome());
                 db.setIdade(user.getIdade());
                 db.setSenha(user.getPassword());
@@ -73,7 +71,7 @@ public class UsuarioService {
         }
     }
 
-
+    
     public UsuarioDTO updateAvatar(Usuario user, Long id) {
         Assert.notNull(id,"Não foi possível atualizar o usuario");
 
