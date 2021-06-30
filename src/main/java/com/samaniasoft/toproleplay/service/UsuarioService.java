@@ -34,6 +34,7 @@ public class UsuarioService {
     //variavel que recebe a senha anterior
     private String senhaAnteriorBancoDados;
 
+
     public UsuarioDTO update(Usuario user, Long id) {
         Assert.notNull(id,"Não foi possível atualizar o usuario");
 
@@ -67,6 +68,27 @@ public class UsuarioService {
             }
 
             return null;
+        } else {
+            return null;
+        }
+    }
+
+
+    public UsuarioDTO updateAvatar(Usuario user, Long id) {
+        Assert.notNull(id,"Não foi possível atualizar o usuario");
+
+        // Busca o usuario no banco de dados
+        Optional<Usuario> optional = usuarioRepository.findById(id);
+        if(optional.isPresent()) {
+            Usuario db = optional.get();
+        
+            // Copiar as propriedades
+            db.setUrlAvatar(user.getUrlAvatar());
+           
+            // Atualiza o usuario
+            usuarioRepository.save(db);
+
+            return UsuarioDTO.create(db);
         } else {
             return null;
         }
