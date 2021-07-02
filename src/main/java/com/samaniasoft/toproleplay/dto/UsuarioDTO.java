@@ -22,11 +22,14 @@ public class UsuarioDTO {
     private String email;
     private String senha;
     private String senhaAnterior;
+    private String senhaProvisoria; //salva a senha do front para poder comparar e atualizar o avatar
+    private String urlAvatar;
+    private int idade;
+
     // token jwt
     private String token;
     private List<String> roles;
-    private String urlAvatar;
-    private int idade;
+    
 
     public static UsuarioDTO create(Usuario user) {
         ModelMapper modelMapper = new ModelMapper();

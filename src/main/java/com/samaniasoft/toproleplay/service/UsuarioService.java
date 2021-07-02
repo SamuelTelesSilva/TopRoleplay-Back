@@ -18,6 +18,11 @@ import org.springframework.util.Assert;
 @Service
 public class UsuarioService {
 
+    private String senhaDB;
+    private String senhaUser;
+    //variavel que recebe a senha anterior
+    private String senhaAnteriorBancoDados;
+
     @Autowired
     private UsuarioRepository usuarioRepository;
 
@@ -31,20 +36,14 @@ public class UsuarioService {
         return UsuarioDTO.createUser(usuarioRepository.save(user));
     }
 
-    //variavel que recebe a senha anterior
-    private String senhaAnteriorBancoDados;
-
-
     public UsuarioDTO update(Usuario user, Long id) {
         Assert.notNull(id,"Não foi possível atualizar o usuario");
 
         // Busca o usuario no banco de dados
         Optional<Usuario> optional = usuarioRepository.findById(id);
         if(optional.isPresent()) {
-
             BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();  
-            
-
+        
             Usuario db = optional.get();
             
             //Estou pegando a senha atual do banco de dados e colocando nesta variavel;
@@ -52,7 +51,6 @@ public class UsuarioService {
 
             //Estou comparando as duas Strings/senhas, se a senha do banco for igual a senha digitada pelo usuario
             if(encoder.matches(user.getSenhaAnterior(), senhaAnteriorBancoDados)){
-                
                 db.setNome(user.getNome());
                 db.setIdade(user.getIdade());
                 db.setSenha(user.getPassword());
@@ -72,21 +70,30 @@ public class UsuarioService {
     }
 
     
+    
     public UsuarioDTO updateAvatar(Usuario user, Long id) {
         Assert.notNull(id,"Não foi possível atualizar o usuario");
 
         // Busca o usuario no banco de dados
         Optional<Usuario> optional = usuarioRepository.findById(id);
+        
         if(optional.isPresent()) {
             Usuario db = optional.get();
-        
-            // Copiar as propriedades
-            db.setUrlAvatar(user.getUrlAvatar());
-           
-            // Atualiza o usuario
-            usuarioRepository.save(db);
 
-            return UsuarioDTO.create(db);
+            senhaDB = db.getPassword(); //pegando a senha atual do bd
+            senhaUser = user.getSenhaProvisoria(); //pegando a senha que o front enviou
+
+            //Estou comparando a senha do BD com a senha enviada pelo front
+            //Se for true ele atualiza o avatar
+            if(senhaDB.equals(senhaUser)){
+                db.setUrlAvatar(user.getUrlAvatar());
+                usuarioRepository.save(db);
+
+                return UsuarioDTO.create(db);
+            }else{
+                return null;
+            }
+
         } else {
             return null;
         }

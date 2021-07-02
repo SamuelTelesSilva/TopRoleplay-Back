@@ -70,6 +70,7 @@ public class UsuarioController {
     @Secured({"ROLE_USER","ROLE_ADMIN"})
     public ResponseEntity putAvatar(@PathVariable("id") Long id, @RequestBody Usuario usuario) {
         usuario.setId(id);
+        
         UsuarioDTO c = usuarioService.updateAvatar(usuario, id);
 
         return c != null ?

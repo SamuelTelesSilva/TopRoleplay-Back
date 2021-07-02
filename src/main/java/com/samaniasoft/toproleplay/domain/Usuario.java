@@ -28,6 +28,7 @@ public class Usuario implements UserDetails{
     private String email;
     private String senha;
     private String senhaAnterior;
+    private String senhaProvisoria; //salva a senha do front para poder comparar e atualizar o avatar
     private String urlAvatar;
     private int idade;
 
