@@ -7,14 +7,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.UniqueConstraint;
+
 
 
 import lombok.Data;
@@ -28,10 +23,13 @@ public class Streamer{
     private Long id;
     private String nome;
     private int coracao;
+    private String urlImageCapa;
+    private String urlImageCard;
+    private String urlFacebook;
+    private String urlInstagram;
+    private String urlTwitter;
+    private String urlPlataformaStream;
 
-    
-    @ManyToMany(mappedBy = "streamers")
-    private List<RedeSocial> redeSociaisDoStreamer;
 
     @JsonIgnore
     @ManyToMany(mappedBy = "lideresGrupo")

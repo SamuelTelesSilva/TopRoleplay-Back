@@ -6,7 +6,6 @@ import javax.persistence.ManyToMany;
 
 
 import com.samaniasoft.toproleplay.domain.Grupo;
-import com.samaniasoft.toproleplay.domain.RedeSocial;
 import com.samaniasoft.toproleplay.domain.Streamer;
 
 import org.modelmapper.ModelMapper;

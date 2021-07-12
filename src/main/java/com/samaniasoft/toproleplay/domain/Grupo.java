@@ -53,7 +53,5 @@ public class Grupo {
     @ManyToMany(mappedBy = "gruposDaCidade")
     private List<Cidade> cidades;
 
-    @ManyToMany(mappedBy = "grupos")
-    private List<RedeSocial> redeSociaisDoGrupo;
 
 }

@@ -51,9 +51,4 @@ public class Cidade {
     private List<Streamer> streamersDaCidade;
 
 
-    @ManyToMany(mappedBy = "cidades")
-    private List<RedeSocial> redeSociaisDaCidade;
-
-
-
 }
