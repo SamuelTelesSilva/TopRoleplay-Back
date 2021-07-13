@@ -11,6 +11,7 @@ import com.samaniasoft.toproleplay.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
@@ -68,6 +69,20 @@ public class UsuarioService {
             return null;
         }
     }
+
+
+    /** Delete an User*/
+    public ResponseEntity<Object> deleteUser(Long id) {
+        if (usuarioRepository.findById(id).isPresent()) {
+            usuarioRepository.deleteById(id);
+            if (usuarioRepository.findById(id).isPresent())
+                return ResponseEntity.unprocessableEntity().body("Failed to Delete the specified User");
+            else return ResponseEntity.ok().body("Successfully deleted the specified user");
+        } else return ResponseEntity.badRequest().body("Cannot find the user specified");
+    }
+
+
+
 
     
     

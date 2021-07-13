@@ -5,6 +5,8 @@ import java.util.List;
 
 import com.samaniasoft.toproleplay.domain.Streamer;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.repository.Query;
+
 import com.samaniasoft.toproleplay.dto.StreamerDTO;
 import com.samaniasoft.toproleplay.service.StreamerService;
 import org.springframework.data.domain.PageRequest;
@@ -12,9 +14,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -46,6 +51,7 @@ public class StreamerController {
     }
 
 
+
     // ---------------------Post--------------------------------------
     @PostMapping
     @Secured({"ROLE_ADMIN"})
@@ -62,5 +68,26 @@ public class StreamerController {
                 .buildAndExpand(id).toUri();
     }
 
+
+    // ---------------------Delete--------------------------------------
+    @DeleteMapping("/{id}")
+    public ResponseEntity delete(@PathVariable("id") Long id){
+        streamerService.delete(id);
+        return ResponseEntity.ok().build();
+    }
+
+
+    /*
+    @PutMapping("/{id}")
+    public ResponseEntity put(@PathVariable("id") Long id, @RequestBody Streamer streamer) {
+        streamer.setId(id);
+        StreamerDTO c = streamerService.update(streamer, id);
+
+
+        return c != null ?
+                ResponseEntity.ok(c) :
+                ResponseEntity.notFound().build();
+    }
+    */
 
 }

@@ -1,13 +1,21 @@
 package com.samaniasoft.toproleplay.domain;
 
 import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.PreRemove;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.ManyToMany;
 
 
@@ -35,6 +43,7 @@ public class Streamer{
     @ManyToMany(mappedBy = "lideresGrupo")
     private List<Grupo> grupos;
 
+    
     @ManyToMany(mappedBy = "streamersDaCidade")
     private List<Cidade> cidade;
 
@@ -46,6 +55,9 @@ public class Streamer{
     @JsonIgnore
     @ManyToMany(mappedBy = "membros")
     private List<Grupo> participa;
+
+
+    
     
 }
 //@OneToMany(mappedBy = "streamer")
