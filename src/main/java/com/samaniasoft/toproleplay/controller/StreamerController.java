@@ -69,15 +69,7 @@ public class StreamerController {
     }
 
 
-    // ---------------------Delete--------------------------------------
-    @DeleteMapping("/{id}")
-    public ResponseEntity delete(@PathVariable("id") Long id){
-        streamerService.delete(id);
-        return ResponseEntity.ok().build();
-    }
-
-
-    /*
+    // ---------------------Put--------------------------------------
     @PutMapping("/{id}")
     public ResponseEntity put(@PathVariable("id") Long id, @RequestBody Streamer streamer) {
         streamer.setId(id);
@@ -88,6 +80,18 @@ public class StreamerController {
                 ResponseEntity.ok(c) :
                 ResponseEntity.notFound().build();
     }
-    */
+
+
+    // ---------------------Delete--------------------------------------
+    @DeleteMapping("/{id}")
+    public ResponseEntity delete(@PathVariable("id") Long id){
+        streamerService.delete(id);
+        return ResponseEntity.ok().build();
+    }
+
+
+   
+    
+    
 
 }

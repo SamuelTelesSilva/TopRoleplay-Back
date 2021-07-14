@@ -42,6 +42,38 @@ public class StreamerService {
     }
 
 
+    // ---------------------Put------------------------------------
+    public StreamerDTO update(Streamer streamer, Long id) {
+
+        Assert.notNull(id,"Não foi possível atualizar o registro");
+
+        // Busca o streamer no banco de dados
+        Optional<Streamer> optional = streamerRepository.findById(id);
+        if(optional.isPresent()) {
+            Streamer db = optional.get();
+            
+            System.out.println(db);
+            // Copiar as propriedades
+            db.setNome(streamer.getNome());
+            db.setCoracao(streamer.getCoracao());
+            db.setUrlFacebook(streamer.getUrlFacebook());
+            db.setUrlImageCapa(streamer.getUrlImageCapa());
+            db.setUrlImageCard(streamer.getUrlImageCard());
+            db.setUrlInstagram(streamer.getUrlInstagram());
+            db.setUrlPlataformaStream(streamer.getUrlPlataformaStream());
+            db.setUrlTwitter(streamer.getUrlTwitter());
+            
+            // Atualiza o streamer
+            streamerRepository.save(db);
+
+            return StreamerDTO.create(db);
+        } else {
+            return null;
+            //throw new RuntimeException("Não foi possível atualizar o registro");
+        }
+    }
+
+
     // ---------------------Delete------------------------------------
     /**
      * Estou pegando os metodos personalizados com o @Query no repository,
@@ -58,28 +90,9 @@ public class StreamerService {
     }
     
 
-    /*
-    public StreamerDTO update(Streamer streamer, Long id) {
-
-        Assert.notNull(id,"Não foi possível atualizar o registro");
-
-        // Busca o streamer no banco de dados
-        Optional<Streamer> optional = streamerRepository.findById(id);
-        if(optional.isPresent()) {
-            Streamer db = optional.get();
-            
-            System.out.println(db);
-
-            // Atualiza o streamer
-            streamerRepository.save(db);
-
-            return StreamerDTO.create(db);
-        } else {
-            return null;
-            //throw new RuntimeException("Não foi possível atualizar o registro");
-        }
-    }
-    */
+    
+    
+    
 
     
 

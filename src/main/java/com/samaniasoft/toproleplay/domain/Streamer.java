@@ -50,7 +50,6 @@ public class Streamer{
     @JsonIgnore
     @OneToMany(mappedBy = "streamer")
     private List<Clipe> clipes;
-
     
     @JsonIgnore
     @ManyToMany(mappedBy = "membros")

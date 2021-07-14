@@ -14,9 +14,11 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 public interface StreamerRepository extends JpaRepository<Streamer, Long>{
+    //Para pesquisar pelo nome
     List<Streamer> findByNome(String nome, Pageable pageable);
 
 
+    //Metodos para deletar o streamer, ele é pai então tem que deletar os filhos primeiro
     @Modifying
     @Query(value = "DELETE FROM grupo_membros WHERE grupo_membros.id_streamer= :id",
     nativeQuery = true)
@@ -36,6 +38,10 @@ public interface StreamerRepository extends JpaRepository<Streamer, Long>{
     @Query(value = "DELETE FROM cidade_streamers WHERE cidade_streamers.id_streamer = :id",
     nativeQuery = true)
     void deleteCidadeStreamer(@Param("id") Long id);
+    //------
+
+
+
     
     
 }
