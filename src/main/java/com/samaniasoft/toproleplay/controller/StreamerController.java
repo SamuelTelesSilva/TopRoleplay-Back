@@ -5,8 +5,6 @@ import java.util.List;
 
 import com.samaniasoft.toproleplay.domain.Streamer;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.jpa.repository.Query;
-
 import com.samaniasoft.toproleplay.dto.StreamerDTO;
 import com.samaniasoft.toproleplay.service.StreamerService;
 import org.springframework.data.domain.PageRequest;
@@ -14,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -68,18 +65,36 @@ public class StreamerController {
                 .buildAndExpand(id).toUri();
     }
 
-
     // ---------------------Put--------------------------------------
     @PutMapping("/{id}")
     public ResponseEntity put(@PathVariable("id") Long id, @RequestBody Streamer streamer) {
         streamer.setId(id);
         StreamerDTO c = streamerService.update(streamer, id);
 
-
         return c != null ?
                 ResponseEntity.ok(c) :
                 ResponseEntity.notFound().build();
     }
+
+    
+    //Atualizando o cidade_streamer
+    @PutMapping(
+        "/newcity/{idCidadeNew}/newstreamer/{idStreamerNew}/cidade/{idCidadeAtual}/streamer/{idStreamerAtual}"
+    )
+    public ResponseEntity updateCityStreamers(
+        @PathVariable("idCidadeNew") Long idCidadeNew, 
+        @PathVariable("idStreamerNew") Long idStreamerNew,
+        @PathVariable("idCidadeAtual") Long idCidadeAtual, 
+        @PathVariable("idStreamerAtual") Long idStreamerAtual
+        ){
+        streamerService.updateCidadeStreamers(
+            idCidadeNew, 
+            idStreamerNew, 
+            idCidadeAtual, 
+            idStreamerAtual);
+        return ResponseEntity.ok().build();
+    }
+    
 
 
     // ---------------------Delete--------------------------------------

@@ -43,16 +43,16 @@ public class StreamerService {
 
 
     // ---------------------Put------------------------------------
+    @Transactional
     public StreamerDTO update(Streamer streamer, Long id) {
-
         Assert.notNull(id,"Não foi possível atualizar o registro");
 
         // Busca o streamer no banco de dados
         Optional<Streamer> optional = streamerRepository.findById(id);
+
         if(optional.isPresent()) {
             Streamer db = optional.get();
             
-            System.out.println(db);
             // Copiar as propriedades
             db.setNome(streamer.getNome());
             db.setCoracao(streamer.getCoracao());
@@ -73,6 +73,19 @@ public class StreamerService {
         }
     }
 
+    /**
+     * Update da associação cidade_streamer
+     * @param idCidadeNew
+     * @param idStreamerNew
+     * @param idCidadeAtual
+     * @param idStreamerAtual
+     */
+    @Transactional
+    public void updateCidadeStreamers(Long idCidadeNew, Long idStreamerNew, Long idCidadeAtual, Long idStreamerAtual) {
+        Assert.notNull(idStreamerAtual,"Não foi possível atualizar o registro");
+        streamerRepository.updateCidadeStreamers(idCidadeNew, idStreamerNew, idCidadeAtual, idStreamerAtual);
+    }
+
 
     // ---------------------Delete------------------------------------
     /**
@@ -88,11 +101,6 @@ public class StreamerService {
         streamerRepository.deleteClipe(id);
         streamerRepository.deleteById(id);
     }
-    
-
-    
-    
-    
 
     
 

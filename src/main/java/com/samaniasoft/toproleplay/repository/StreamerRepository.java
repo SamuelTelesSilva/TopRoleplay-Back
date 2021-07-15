@@ -41,7 +41,27 @@ public interface StreamerRepository extends JpaRepository<Streamer, Long>{
     //------
 
 
+    /**
+     * Metodos para fazer uma modificação na associação do streamer
+     * @param idCidadeAtual id da cidade atual
+     * @param idStreamerAtual id do streamer atual
+     * @param idCidadeNew id da cidade para fazer o update na cidade atual
+     * @param idStreamerNew id do streamer para fazer o update no streamer atual
+     */
+    @Modifying
+    @Query(value = "UPDATE cidade_streamers SET id_cidade = :idCidadeNew, id_streamer = :idStreamerNew WHERE cidade_streamers.id_cidade = :idCidadeAtual AND cidade_streamers.id_streamer = :idStreamerAtual",
+        nativeQuery = true
+    )
+    void updateCidadeStreamers(
+        @Param("idCidadeNew") Long idCidadeNew,
+        @Param("idStreamerNew") Long idStreamerNew,
+        @Param("idCidadeAtual") Long idCidadeAtual,
+        @Param("idStreamerAtual") Long idStreamerAtual
+    );
 
-    
+
+
+
+
     
 }
