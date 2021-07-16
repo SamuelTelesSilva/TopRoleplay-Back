@@ -36,11 +36,12 @@ public class StreamerService {
     }
 
     // ---------------------Post------------------------------------
-    public StreamerDTO insert(Streamer streamer) {
+    @Transactional
+    public StreamerDTO insert(Streamer streamer, Long id_cidade, Long id_streamer) {
         Assert.isNull(streamer.getId(), "Não foi possivel inserir o seu Post");
+        streamerRepository.saveCidadeStreamers(id_cidade, id_streamer);
         return StreamerDTO.create(streamerRepository.save(streamer));
     }
-
 
     // ---------------------Put------------------------------------
     @Transactional

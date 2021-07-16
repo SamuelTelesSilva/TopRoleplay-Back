@@ -44,7 +44,7 @@ public class Streamer{
     private List<Grupo> grupos;
 
     
-    @ManyToMany(mappedBy = "streamersDaCidade")
+    @ManyToMany(mappedBy = "streamersDaCidade")//ok
     private List<Cidade> cidade;
 
     @JsonIgnore

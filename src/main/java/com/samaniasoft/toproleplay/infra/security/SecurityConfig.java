@@ -43,7 +43,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.cors().configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues())
                 .and()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.POST, "/api/login", "/api/streamer", "/api/clipe","/api/usuarios", "/api/grupo", "/api/cidade", "/api/noticia").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/login", "/api/streamer/**", "/api/clipe","/api/usuarios", "/api/grupo", "/api/cidade", "/api/noticia").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/usuarios", "/api/streamer/**","/api/clipe", "/api/grupo", "/api/cidade", "/api/noticia").permitAll()
                 .antMatchers(HttpMethod.DELETE, "/api/streamer/**", "/api/usuarios/**").permitAll()
                 .antMatchers(HttpMethod.PUT, "/api/usuarios/**", "/api/streamer/**").permitAll()

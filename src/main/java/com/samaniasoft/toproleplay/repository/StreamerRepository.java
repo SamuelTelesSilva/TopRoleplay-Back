@@ -18,6 +18,15 @@ public interface StreamerRepository extends JpaRepository<Streamer, Long>{
     List<Streamer> findByNome(String nome, Pageable pageable);
 
 
+
+
+    //Metodo para fazer o post na tabela cidade_streamer
+    @Modifying
+    @Query( value = "INSERT INTO cidade_streamers (id_cidade, id_streamer) VALUES ( :id_cidade, :id_streamer)", nativeQuery= true)
+    void saveCidadeStreamers(@Param("id_cidade") Long id_cidade, @Param("id_streamer") Long id_streamer);  
+
+
+
     //Metodos para deletar o streamer, ele é pai então tem que deletar os filhos primeiro
     @Modifying
     @Query(value = "DELETE FROM grupo_membros WHERE grupo_membros.id_streamer= :id",

@@ -50,11 +50,11 @@ public class StreamerController {
 
 
     // ---------------------Post--------------------------------------
-    @PostMapping
+    @PostMapping("/cidadeid/{id_cidade}/streamerid/{id_streamer}")
     @Secured({"ROLE_ADMIN"})
-    public ResponseEntity adicionarStreamer(@RequestBody Streamer streamer) {
+    public ResponseEntity adicionarStreamer(@RequestBody Streamer streamer, @PathVariable("id_cidade") Long id_cidade, @PathVariable("id_streamer") Long id_streamer) {
 
-        StreamerDTO p = streamerService.insert(streamer);
+        StreamerDTO p = streamerService.insert(streamer, id_cidade, id_streamer);
 
         URI location = getUri(p.getId());
         return ResponseEntity.created(location).build();
