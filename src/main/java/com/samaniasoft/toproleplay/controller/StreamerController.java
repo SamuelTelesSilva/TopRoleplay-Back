@@ -1,7 +1,7 @@
 package com.samaniasoft.toproleplay.controller;
 
 import java.net.URI;
-import java.util.List;
+
 
 import com.samaniasoft.toproleplay.domain.Streamer;
 import org.springframework.data.domain.Sort;
@@ -32,40 +32,23 @@ public class StreamerController {
 
     // ---------------------GET--------------------------------------
     @GetMapping
-    public ResponseEntity getStreamers(Pageable pageable){
-        return ResponseEntity.ok(streamerService.getStreamers(pageable));
+    public ResponseEntity getStreamers(
+        Pageable pageable,
+        @RequestParam(value = "page", defaultValue = "0") Integer page,
+        @RequestParam(value = "size", defaultValue = "5") Integer size
+    ){
+        return ResponseEntity.ok(streamerService.getStreamers(PageRequest.of(page, size, Sort.by("id").descending())));
     }
-
-
-    @GetMapping("/search/{nome}")
-    public ResponseEntity getStreamerByName(@PathVariable("nome") String nome,
-                                        @RequestParam(value = "page", defaultValue = "0") Integer page,
-                                        @RequestParam(value = "size", defaultValue = "5") Integer size){
-        List<StreamerDTO> streamers = streamerService.getStreamerByName(nome, PageRequest.of(page, size, Sort.by("id").descending()));
-
-        return streamers.isEmpty() ? ResponseEntity.noContent().build() : 
-                ResponseEntity.ok(streamers);
-    }
-
 
     @GetMapping("/search/streamer/{nome}")
-    public ResponseEntity searchStreamerByName(@PathVariable("nome") String nome,
-                                        @RequestParam(value = "page", defaultValue = "0") Integer page,
-                                        @RequestParam(value = "size", defaultValue = "5") Integer size){
-        List<StreamerDTO> streamers = streamerService.getStreamerByNameLike(nome, PageRequest.of(page, size, Sort.by("id").descending()));
-
-        return streamers.isEmpty() ? ResponseEntity.noContent().build() : 
-                ResponseEntity.ok(streamers);
+    public ResponseEntity searchStreamerByName(
+        @PathVariable("nome") String nome, Pageable pageable,
+        @RequestParam(value = "page", defaultValue = "0") Integer page,
+        @RequestParam(value = "size", defaultValue = "5") Integer size
+    ){
+        return ResponseEntity.ok(streamerService.getStreamerByNameLike(nome, PageRequest.of(page, size, Sort.by("id").descending())));
     }
 
-
-
-    /*
-    @GetMapping("/citystreamer")
-    public ResponseEntity getAllCityStreamer(){
-        return ResponseEntity.ok(streamerService.getAllCityStreamer());
-    }
-    */
 
     // ---------------------Post--------------------------------------
     @PostMapping

@@ -32,20 +32,9 @@ public class StreamerService {
         return streamerRepository.findAll(pageable);
     }
 
-    public List<StreamerDTO> getStreamerByName(String nome, Pageable pageable){
-        return streamerRepository.findByNome(nome, pageable).stream().map(StreamerDTO::create).collect(Collectors.toList());
+    public Page<Streamer> getStreamerByNameLike(String nome, Pageable pageable){
+        return streamerRepository.searchByNameLike(nome, pageable);
     }
-
-
-    public List<StreamerDTO> getStreamerByNameLike(String nome, Pageable pageable){
-        return streamerRepository.searchByNameLike(nome, pageable).stream().map(StreamerDTO::create).collect(Collectors.toList());
-    }
-
-    /*
-    public List<cidadeStreamer> getAllCityStreamer(){
-        return streamerRepository.getAllCityStreamer();
-    }
-    */
 
     // ---------------------Post------------------------------------
     public StreamerDTO insert(Streamer streamer) {
@@ -57,7 +46,6 @@ public class StreamerService {
     public void insertCityStreamer(Long id_cidade, Long id_streamer) {
         streamerRepository.saveCidadeStreamers(id_cidade, id_streamer);
     }
-
 
     // ---------------------Put------------------------------------
     @Transactional

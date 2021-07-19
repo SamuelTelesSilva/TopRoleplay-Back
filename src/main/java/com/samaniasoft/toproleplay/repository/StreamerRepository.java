@@ -8,6 +8,7 @@ import com.samaniasoft.toproleplay.domain.Streamer;
 import com.samaniasoft.toproleplay.domain.Usuario;
 import com.samaniasoft.toproleplay.domain.cidadeStreamer;
 
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -15,22 +16,10 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 public interface StreamerRepository extends JpaRepository<Streamer, Long>{
-    //Para pesquisar pelo nome
-    List<Streamer> findByNome(String nome, Pageable pageable);
-
 
     //Para pesquisar pelo nome
     @Query(value = "SELECT * FROM streamer WHERE nome LIKE %:nome% ", nativeQuery = true)
-    List<Streamer> searchByNameLike(@Param("nome") String nome, Pageable pageable);
-
-
-
-    /*
-    //Metodo para pegar todos os dados da tabela
-    @Query( value = "SELECT * from cidade_streamers", nativeQuery= true)
-    List<cidadeStreamer> getAllCityStreamer();
-    */
-
+    Page<Streamer> searchByNameLike(@Param("nome") String nome, Pageable pageable);
 
     //Metodo para fazer o post na tabela cidade_streamer
     @Modifying
