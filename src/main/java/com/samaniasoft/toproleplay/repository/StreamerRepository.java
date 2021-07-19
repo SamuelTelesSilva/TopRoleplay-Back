@@ -6,6 +6,7 @@ import java.util.List;
 import com.samaniasoft.toproleplay.domain.Grupo;
 import com.samaniasoft.toproleplay.domain.Streamer;
 import com.samaniasoft.toproleplay.domain.Usuario;
+import com.samaniasoft.toproleplay.domain.cidadeStreamer;
 
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -18,13 +19,23 @@ public interface StreamerRepository extends JpaRepository<Streamer, Long>{
     List<Streamer> findByNome(String nome, Pageable pageable);
 
 
+    //Para pesquisar pelo nome
+    @Query(value = "SELECT * FROM streamer WHERE nome LIKE %:nome% ", nativeQuery = true)
+    List<Streamer> searchByNameLike(@Param("nome") String nome, Pageable pageable);
+
+
+
+    /*
+    //Metodo para pegar todos os dados da tabela
+    @Query( value = "SELECT * from cidade_streamers", nativeQuery= true)
+    List<cidadeStreamer> getAllCityStreamer();
+    */
 
 
     //Metodo para fazer o post na tabela cidade_streamer
     @Modifying
     @Query( value = "INSERT INTO cidade_streamers (id_cidade, id_streamer) VALUES ( :id_cidade, :id_streamer)", nativeQuery= true)
     void saveCidadeStreamers(@Param("id_cidade") Long id_cidade, @Param("id_streamer") Long id_streamer);  
-
 
 
     //Metodos para deletar o streamer, ele é pai então tem que deletar os filhos primeiro

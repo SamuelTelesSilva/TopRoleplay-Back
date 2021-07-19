@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.samaniasoft.toproleplay.domain.Streamer;
+import com.samaniasoft.toproleplay.domain.cidadeStreamer;
 import com.samaniasoft.toproleplay.dto.StreamerDTO;
 import com.samaniasoft.toproleplay.dto.UsuarioDTO;
 import com.samaniasoft.toproleplay.repository.StreamerRepository;
@@ -35,13 +36,28 @@ public class StreamerService {
         return streamerRepository.findByNome(nome, pageable).stream().map(StreamerDTO::create).collect(Collectors.toList());
     }
 
+
+    public List<StreamerDTO> getStreamerByNameLike(String nome, Pageable pageable){
+        return streamerRepository.searchByNameLike(nome, pageable).stream().map(StreamerDTO::create).collect(Collectors.toList());
+    }
+
+    /*
+    public List<cidadeStreamer> getAllCityStreamer(){
+        return streamerRepository.getAllCityStreamer();
+    }
+    */
+
     // ---------------------Post------------------------------------
-    @Transactional
-    public StreamerDTO insert(Streamer streamer, Long id_cidade, Long id_streamer) {
+    public StreamerDTO insert(Streamer streamer) {
         Assert.isNull(streamer.getId(), "Não foi possivel inserir o seu Post");
-        streamerRepository.saveCidadeStreamers(id_cidade, id_streamer);
         return StreamerDTO.create(streamerRepository.save(streamer));
     }
+
+    @Transactional
+    public void insertCityStreamer(Long id_cidade, Long id_streamer) {
+        streamerRepository.saveCidadeStreamers(id_cidade, id_streamer);
+    }
+
 
     // ---------------------Put------------------------------------
     @Transactional

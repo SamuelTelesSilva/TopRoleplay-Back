@@ -48,13 +48,31 @@ public class StreamerController {
     }
 
 
+    @GetMapping("/search/streamer/{nome}")
+    public ResponseEntity searchStreamerByName(@PathVariable("nome") String nome,
+                                        @RequestParam(value = "page", defaultValue = "0") Integer page,
+                                        @RequestParam(value = "size", defaultValue = "5") Integer size){
+        List<StreamerDTO> streamers = streamerService.getStreamerByNameLike(nome, PageRequest.of(page, size, Sort.by("id").descending()));
+
+        return streamers.isEmpty() ? ResponseEntity.noContent().build() : 
+                ResponseEntity.ok(streamers);
+    }
+
+
+
+    /*
+    @GetMapping("/citystreamer")
+    public ResponseEntity getAllCityStreamer(){
+        return ResponseEntity.ok(streamerService.getAllCityStreamer());
+    }
+    */
 
     // ---------------------Post--------------------------------------
-    @PostMapping("/cidadeid/{id_cidade}/streamerid/{id_streamer}")
+    @PostMapping
     @Secured({"ROLE_ADMIN"})
-    public ResponseEntity adicionarStreamer(@RequestBody Streamer streamer, @PathVariable("id_cidade") Long id_cidade, @PathVariable("id_streamer") Long id_streamer) {
+    public ResponseEntity adicionarStreamer(@RequestBody Streamer streamer) {
 
-        StreamerDTO p = streamerService.insert(streamer, id_cidade, id_streamer);
+        StreamerDTO p = streamerService.insert(streamer);
 
         URI location = getUri(p.getId());
         return ResponseEntity.created(location).build();
@@ -63,6 +81,18 @@ public class StreamerController {
     private URI getUri(Long id) {
         return ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
                 .buildAndExpand(id).toUri();
+    }
+
+
+    @PostMapping("/cidadeid/{id_cidade}/streamerid/{id_streamer}")
+    public ResponseEntity saveCityStreamers(
+        @PathVariable("id_cidade") Long id_cidade, 
+        @PathVariable("id_streamer") Long id_streamer
+        ){
+        streamerService.insertCityStreamer(
+            id_cidade, 
+            id_streamer);
+        return ResponseEntity.ok().build();
     }
 
     // ---------------------Put--------------------------------------
