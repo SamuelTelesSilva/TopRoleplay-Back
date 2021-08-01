@@ -40,7 +40,7 @@ public class StreamerController {
         return ResponseEntity.ok(streamerService.getStreamers(PageRequest.of(page, size, Sort.by("id").descending())));
     }
 
-    @GetMapping("/search/streamer/{nome}")
+    @GetMapping("/search/{nome}")
     public ResponseEntity searchStreamerByName(
         @PathVariable("nome") String nome, Pageable pageable,
         @RequestParam(value = "page", defaultValue = "0") Integer page,
@@ -56,6 +56,7 @@ public class StreamerController {
     public ResponseEntity adicionarStreamer(@RequestBody Streamer streamer) {
 
         StreamerDTO p = streamerService.insert(streamer);
+        System.out.println(p.getId());
 
         URI location = getUri(p.getId());
         return ResponseEntity.created(location).build();

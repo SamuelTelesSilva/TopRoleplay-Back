@@ -16,7 +16,13 @@ public class CidadeDTO {
     private Long id;
     private String nome;
     private int coracao;
-    
+    private String urlImageCapa;
+    private String urlImageCard;
+    private String urlFacebook;
+    private String urlInstagram;
+    private String urlTwitter;
+    private String urlDiscord;
+    private String urlPlataformaStream;
     //private List<RedeSocial> redeSociaisDaCidad;
     //private List<Streamer> streamersDaCidade;
     //private List<Grupo> gruposDaCidade;

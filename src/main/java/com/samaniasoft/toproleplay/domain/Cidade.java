@@ -28,7 +28,14 @@ public class Cidade {
     private Long id;
     private String nome;
     private int coracao;
-    
+    private String urlImageCapa;
+    private String urlImageCard;
+    private String urlFacebook;
+    private String urlInstagram;
+    private String urlTwitter;
+    private String urlDiscord;
+    private String urlPlataformaStream;
+
 
     @JsonIgnore
     @ManyToMany
