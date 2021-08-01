@@ -30,11 +30,10 @@ public class Cidade {
     private int coracao;
     private String urlImageCapa;
     private String urlImageCard;
-    private String urlFacebook;
     private String urlInstagram;
     private String urlTwitter;
     private String urlDiscord;
-    private String urlPlataformaStream;
+
 
 
     @JsonIgnore
