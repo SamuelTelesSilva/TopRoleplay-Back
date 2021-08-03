@@ -21,6 +21,10 @@ public class CidadeService {
         return cidadeRepository.findAll(pageable);
     }
 
+    public Page<Cidade> getCityByNameLike(String nome, Pageable pageable){
+        return cidadeRepository.searchByNameLike(nome, pageable);
+    }
+
     // ---------------------Post------------------------------------
     public CidadeDTO insert(Cidade cidade) {
         Assert.isNull(cidade.getId(), "Não foi possivel inserir o seu Post");

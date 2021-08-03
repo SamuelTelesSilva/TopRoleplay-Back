@@ -1,12 +1,6 @@
 package com.samaniasoft.toproleplay.repository;
 
-import java.util.Collection;
-import java.util.List;
-
-import com.samaniasoft.toproleplay.domain.Grupo;
 import com.samaniasoft.toproleplay.domain.Streamer;
-import com.samaniasoft.toproleplay.domain.Usuario;
-import com.samaniasoft.toproleplay.domain.cidadeStreamer;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
