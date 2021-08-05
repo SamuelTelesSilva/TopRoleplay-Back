@@ -80,9 +80,6 @@ public class UsuarioService {
     }
 
 
-
-
-    
     
     public UsuarioDTO updateAvatar(Usuario user, Long id) {
         Assert.notNull(id,"Não foi possível atualizar o usuario");
