@@ -13,7 +13,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
-import org.springframework.web.bind.annotation.DeleteMapping;
 
 @Service
 public class CidadeService {
@@ -67,7 +66,7 @@ public class CidadeService {
     public ResponseEntity delete(Long id){
 
         if(cidadeRepository.findById(id).isPresent()){
-            
+
             cidadeRepository.deleteCidadeStreamer(id);
             cidadeRepository.deleteCidadeGrupo(id);
             cidadeRepository.deleteById(id);
