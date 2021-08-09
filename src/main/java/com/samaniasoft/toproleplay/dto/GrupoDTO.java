@@ -18,6 +18,7 @@ public class GrupoDTO {
     private Long id;
     private String nome;
     private String genero;
+    private int coracao;
     
     @ManyToMany
     private List<Streamer> liderGrupo;

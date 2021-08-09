@@ -11,7 +11,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -44,5 +46,17 @@ public class GrupoController {
     private URI getUri(Long id) {
         return ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
                 .buildAndExpand(id).toUri();
+    }
+
+    // ---------------------Update--------------------------------------
+    @PutMapping("/{id}")
+    @Secured({"ROLE_ADMIN"})
+    public ResponseEntity put(@PathVariable("id") Long id, @RequestBody Grupo grupo) {
+
+        GrupoDTO g = grupoService.update(grupo, id);
+
+        return g != null ?
+                ResponseEntity.ok(g) :
+                ResponseEntity.notFound().build();
     }
 }
