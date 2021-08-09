@@ -66,29 +66,29 @@ public interface GrupoRepository extends JpaRepository<Grupo, Long>{
      * @param id
      */
     @Modifying
-    @Query(value = "DELETE FROM grupo_lideres WHERE grupo_lideres.id_streamer = :id",
+    @Query(value = "DELETE FROM grupo_lideres WHERE grupo_lideres.id_grupo = :id_grupo AND grupo_lideres.id_streamer = :id_streamer",
         nativeQuery = true)
-    void deleteLeaderGroup(@Param("id") Long id);
+    void deleteLeaderGroup(@Param("id_grupo") Long id_grupo, @Param("id_streamer") Long id_streamer);
 
     /**
      * Método para remover a associação do membro do grupo
      * @param id
     */
     @Modifying
-    @Query(value = "DELETE FROM grupo_membros WHERE grupo_membros.id_streamer = :id",
+    @Query(value = "DELETE FROM grupo_membros WHERE grupo_membros.id_grupo = :id_grupo AND grupo_membros.id_streamer = :id_streamer",
         nativeQuery = true)
-    void deleteMemberGroup(@Param("id") Long id);
+    void deleteMemberGroup(@Param("id_grupo") Long id_grupo, @Param("id_streamer") Long id_streamer);
 
     /**
      * Método para remover a associação da cidade do grupo
      * @param id
     */
     @Modifying
-    @Query(value = "DELETE FROM cidade_grupos WHERE cidade_grupos.id_cidade = :id",
+    @Query(value = "DELETE FROM cidade_grupos WHERE cidade_grupos.id_cidade = :id_cidade AND cidade_grupos.id_grupo = :id_grupo",
         nativeQuery = true)
-    void deleteCityGroup(@Param("id") Long id);
+    void deleteCityGroup(@Param("id_cidade") Long id_cidade, @Param("id_grupo") Long id_grupo);
 
 
-    
+
 }
 

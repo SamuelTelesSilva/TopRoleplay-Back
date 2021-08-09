@@ -78,4 +78,19 @@ public class GrupoService {
         grupoRepository.deleteById(id);
     }
 
+    @Transactional
+    public void deleteLeaderGroup(Long id_grupo, Long id_streamer){
+        grupoRepository.deleteLeaderGroup(id_grupo, id_streamer);
+    }
+
+    @Transactional
+    public void deleteMemberGroup(Long id_grupo, Long id_streamer){
+        grupoRepository.deleteMemberGroup(id_grupo, id_streamer);
+    }
+
+    @Transactional
+    public void deleteCityGroup(Long id_cidade, Long id_grupo){
+        grupoRepository.deleteCityGroup(id_cidade, id_grupo);
+    }
+
 }

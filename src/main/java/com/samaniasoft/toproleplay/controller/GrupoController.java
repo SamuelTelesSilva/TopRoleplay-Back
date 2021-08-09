@@ -97,4 +97,30 @@ public class GrupoController {
         grupoService.deleteAllByGroupId(id);
         return ResponseEntity.ok().build();
     }
+
+    @DeleteMapping("/{id_grupo}/lider/{id_streamer}")
+    public ResponseEntity deleteLeader(
+        @PathVariable("id_grupo") Long id_grupo, @PathVariable("id_streamer") Long id_streamer
+    ){
+        grupoService.deleteLeaderGroup(id_grupo, id_streamer);
+        return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping("/{id_grupo}/membro/{id_streamer}")
+    public ResponseEntity deleteMember(
+        @PathVariable("id_grupo") Long id_grupo, @PathVariable("id_streamer") Long id_streamer
+    ){
+        grupoService.deleteMemberGroup(id_grupo, id_streamer);
+        return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping("/{id_grupo}/cidade/{id_cidade}")
+    public ResponseEntity deleteCity(
+        @PathVariable("id_grupo") Long id_grupo, @PathVariable("id_cidade") Long id_cidade
+    ){
+        grupoService.deleteCityGroup(id_cidade, id_grupo);
+        return ResponseEntity.ok().build();
+    }
+
+
 }
