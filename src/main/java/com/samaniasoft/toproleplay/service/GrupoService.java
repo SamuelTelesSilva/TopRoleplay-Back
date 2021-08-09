@@ -30,6 +30,25 @@ public class GrupoService {
         return GrupoDTO.create(grupoRepository.save(grupo));
     }
 
+    //Associar o Lider do grupo
+    @Transactional
+    public void insertLeaderGroup(Long id_grupo, Long id_streamer){
+        grupoRepository.saveLeadersGroup(id_grupo, id_streamer);
+    }
+
+    //Associar os membros do grupo
+    @Transactional
+    public void insertMemberGroup(Long id_grupo, Long id_streamer){
+        grupoRepository.saveMembersGroup(id_grupo, id_streamer);
+    }
+
+    //Associar a cidade aonde o grupo joga
+    @Transactional
+    public void insertCityGroup(Long id_cidade, Long id_grupo){
+        grupoRepository.saveCityGroup(id_cidade, id_grupo);
+    }
+
+
     // ---------------------Update------------------------------------
     public GrupoDTO update(Grupo grupo, Long id){
         Assert.notNull(id, "Não foi possível atualizar o registro");

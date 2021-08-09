@@ -49,6 +49,35 @@ public class GrupoController {
                 .buildAndExpand(id).toUri();
     }
 
+
+    @PostMapping("/{id}/lider/{idStreamer}")
+    public ResponseEntity saveLeaderGroup(
+        @PathVariable("id") Long id, 
+        @PathVariable("idStreamer") Long idStreamer
+    ){
+        grupoService.insertLeaderGroup(id, idStreamer);
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/{id}/membro/{idStreamer}")
+    public ResponseEntity saveMemberGroup(
+        @PathVariable("id") Long id, 
+        @PathVariable("idStreamer") Long idStreamer
+    ){
+        grupoService.insertMemberGroup(id, idStreamer);
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/{id}/cidade/{idCidade}")
+    public ResponseEntity saveCityGroup(
+        @PathVariable("id") Long id, 
+        @PathVariable("idCidade") Long idCidade
+    ){
+        grupoService.insertCityGroup(idCidade, id);
+        return ResponseEntity.ok().build();
+    }
+
+
     // ---------------------Update--------------------------------------
     @PutMapping("/{id}")
     @Secured({"ROLE_ADMIN"})

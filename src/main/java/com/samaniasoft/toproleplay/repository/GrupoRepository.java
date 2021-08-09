@@ -40,56 +40,55 @@ public interface GrupoRepository extends JpaRepository<Grupo, Long>{
         nativeQuery= true)
     void saveCityGroup(@Param("id_cidade") Long id_cidade, @Param("id_grupo") Long id_grupo);
 
-
-    //-------------------------------------------------------------------
-    /**
-     * Método para remover a associação do lider do grupo
-     * @param id
-     */
+    //-------------------------------------------------------------------------------------------
+    //Métodos para Deletar o grupo por completo
     @Modifying
     @Query(value = "DELETE FROM grupo_lideres WHERE grupo_lideres.id_grupo = :id",
         nativeQuery = true)
     void deleteAllGroupLeader(@Param("id") Long id);
 
-    /**
-     * Método para remover a associação do membro do grupo
-     * @param id
-     */
     @Modifying
     @Query(value = "DELETE FROM grupo_membros WHERE grupo_membros.id_grupo = :id",
         nativeQuery = true)
     void deleteAllGroupMember(@Param("id") Long id);
 
-
-    /**
-     * Método para remover a associação da cidade do grupo
-     * @param id
-     */
     @Modifying
     @Query(value = "DELETE FROM cidade_grupos WHERE cidade_grupos.id_grupo = :id",
         nativeQuery = true)
     void deleteAllGroupCity(@Param("id") Long id);
 
-}
 
+    //---------------------------------------------------------------------------------
+    //Métodos para remover apenas Lideres/membros/cidades do grupo
 
-/*
-
+    /**
+     * Método para remover a associação do lider do grupo
+     * @param id
+     */
     @Modifying
     @Query(value = "DELETE FROM grupo_lideres WHERE grupo_lideres.id_streamer = :id",
         nativeQuery = true)
     void deleteLeaderGroup(@Param("id") Long id);
 
- 
+    /**
+     * Método para remover a associação do membro do grupo
+     * @param id
+    */
     @Modifying
     @Query(value = "DELETE FROM grupo_membros WHERE grupo_membros.id_streamer = :id",
         nativeQuery = true)
     void deleteMemberGroup(@Param("id") Long id);
 
-
-
+    /**
+     * Método para remover a associação da cidade do grupo
+     * @param id
+    */
     @Modifying
     @Query(value = "DELETE FROM cidade_grupos WHERE cidade_grupos.id_cidade = :id",
         nativeQuery = true)
     void deleteCityGroup(@Param("id") Long id);
- */
+
+
+    
+}
+
