@@ -24,6 +24,10 @@ public class GrupoService {
         return grupoRepository.findAll(pageable);
     }
 
+    public Page<Grupo> getGroupByNameLike(String nome, Pageable pageable){
+        return grupoRepository.searchByNameLike(nome, pageable);
+    }
+
     // ---------------------Post------------------------------------
     public GrupoDTO insert(Grupo grupo) {
         Assert.isNull(grupo.getId(), "Não foi possivel inserir o seu Post");

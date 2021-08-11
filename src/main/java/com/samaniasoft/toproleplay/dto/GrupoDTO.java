@@ -19,6 +19,8 @@ public class GrupoDTO {
     private String nome;
     private String genero;
     private int coracao;
+    private String urlImageCapa;
+    private String urlImageCard;
     
     @ManyToMany
     private List<Streamer> liderGrupo;

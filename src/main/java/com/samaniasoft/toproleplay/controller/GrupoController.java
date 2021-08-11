@@ -5,7 +5,7 @@ import java.net.URI;
 import com.samaniasoft.toproleplay.domain.Grupo;
 import com.samaniasoft.toproleplay.dto.GrupoDTO;
 import com.samaniasoft.toproleplay.service.GrupoService;
-
+import org.springframework.data.domain.PageRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -17,8 +17,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import org.springframework.data.domain.Sort;
 
 @RestController
 @RequestMapping("/api/grupo")
@@ -31,6 +33,15 @@ public class GrupoController {
     @GetMapping
     public ResponseEntity getGrupos(Pageable pageable){
         return ResponseEntity.ok(grupoService.getGrupos(pageable));
+    }
+
+    @GetMapping("/search/{nome}")
+    public ResponseEntity searchGroupByName(
+        @PathVariable("nome") String nome, Pageable pageable,
+        @RequestParam(value = "page", defaultValue = "0") Integer page,
+        @RequestParam(value = "size", defaultValue = "5") Integer size
+    ){
+        return ResponseEntity.ok(grupoService.getGroupByNameLike(nome, PageRequest.of(page, size, Sort.by("id").descending())));
     }
 
     // ---------------------Post--------------------------------------
