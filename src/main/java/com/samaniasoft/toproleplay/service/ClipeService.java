@@ -29,4 +29,9 @@ public class ClipeService {
         return ClipeDTO.create(clipeRepository.save(clipe));
     }
 
+    // ---------------------Delete------------------------------------
+    public void delete(Long id){
+        clipeRepository.deleteById(id);
+    }
+
 }

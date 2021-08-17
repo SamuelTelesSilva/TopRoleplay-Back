@@ -37,7 +37,6 @@ public class CidadeController {
         return ResponseEntity.ok(cidadeService.getCidades(pageable));
     }
 
-
     @GetMapping("/search/{nome}")
     public ResponseEntity searchCityByName(
         @PathVariable("nome") String nome, Pageable pageable,

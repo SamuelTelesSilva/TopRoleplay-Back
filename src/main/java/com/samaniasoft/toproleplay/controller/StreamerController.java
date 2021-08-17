@@ -32,12 +32,8 @@ public class StreamerController {
 
     // ---------------------GET--------------------------------------
     @GetMapping
-    public ResponseEntity getStreamers(
-        Pageable pageable,
-        @RequestParam(value = "page", defaultValue = "0") Integer page,
-        @RequestParam(value = "size", defaultValue = "5") Integer size
-    ){
-        return ResponseEntity.ok(streamerService.getStreamers(PageRequest.of(page, size, Sort.by("id").descending())));
+    public ResponseEntity getStreamers(Pageable pageable){
+        return ResponseEntity.ok(streamerService.getStreamers(pageable));
     }
 
     @GetMapping("/search/{nome}")

@@ -21,6 +21,9 @@ public class Clipe {
     private Long id;
     private String titulo;
     private String url;
+    private int coracao;
+    private String urlImageCapa;
+    private String urlImageCard;
 
     
     @ManyToOne

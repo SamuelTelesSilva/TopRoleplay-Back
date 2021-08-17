@@ -64,6 +64,8 @@ public class GrupoService {
             db.setNome(grupo.getNome());
             db.setGenero(grupo.getGenero());
             db.setCoracao(grupo.getCoracao());
+            db.setUrlImageCard(grupo.getUrlImageCard());
+            db.setUrlImageCapa(grupo.getUrlImageCapa());
 
             grupoRepository.save(db);
             return GrupoDTO.create(db);

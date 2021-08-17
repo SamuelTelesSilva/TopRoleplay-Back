@@ -4,8 +4,6 @@ package com.samaniasoft.toproleplay.dto;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.samaniasoft.toproleplay.domain.Clipe;
 
 import org.modelmapper.ModelMapper;
@@ -18,6 +16,9 @@ public class ClipeDTO {
     private Long id;
     private String titulo;
     private String url;
+    private int coracao;
+    private String urlImageCapa;
+    private String urlImageCard;
 
 
     @ManyToOne
