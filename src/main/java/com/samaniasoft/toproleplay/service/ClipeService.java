@@ -1,5 +1,7 @@
 package com.samaniasoft.toproleplay.service;
 
+import java.util.Optional;
+
 import com.samaniasoft.toproleplay.domain.Clipe;
 import com.samaniasoft.toproleplay.dto.ClipeDTO;
 import com.samaniasoft.toproleplay.repository.ClipeRepository;
@@ -27,6 +29,29 @@ public class ClipeService {
     public ClipeDTO insert(Clipe clipe) {
         Assert.isNull(clipe.getId(), "Não foi possivel inserir o seu Post");
         return ClipeDTO.create(clipeRepository.save(clipe));
+    }
+
+    // ---------------------Update------------------------------------
+    public ClipeDTO update(Clipe clipe, Long id){
+        Assert.notNull(id, "Não foi possível atualizar o clipe");
+
+        Optional<Clipe> optional = clipeRepository.findById(id);
+
+        if(optional.isPresent()){
+            Clipe db = optional.get();
+
+            db.setTitulo(clipe.getTitulo());
+            db.setUrl(clipe.getUrl());
+            db.setCoracao(clipe.getCoracao());
+            db.setUrlImageCard(clipe.getUrlImageCard());
+            db.setUrlImageCapa(clipe.getUrlImageCapa());
+            db.setStreamer(clipe.getStreamer());
+
+            clipeRepository.save(db);
+            return ClipeDTO.create(db);
+        }else{
+            return null;
+        }
     }
 
     // ---------------------Delete------------------------------------
