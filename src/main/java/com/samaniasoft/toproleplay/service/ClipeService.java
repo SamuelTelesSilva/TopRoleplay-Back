@@ -25,6 +25,10 @@ public class ClipeService {
         return clipeRepository.findAll(pageable);
     }
 
+    public Page<Clipe> getClipeByTituloLike(String titulo, Pageable pageable){
+        return clipeRepository.searchByTituloLike(titulo, pageable);
+    }
+
     // ---------------------Post------------------------------------
     public ClipeDTO insert(Clipe clipe) {
         Assert.isNull(clipe.getId(), "Não foi possivel inserir o seu Post");
