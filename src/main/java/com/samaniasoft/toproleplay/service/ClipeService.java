@@ -56,6 +56,7 @@ public class ClipeService {
             db.setUrlImageCard(clipe.getUrlImageCard());
             db.setUrlImageCapa(clipe.getUrlImageCapa());
             db.setStreamer(clipe.getStreamer());
+            db.setTwitch(clipe.isTwitch());
 
             clipeRepository.save(db);
             return ClipeDTO.create(db);

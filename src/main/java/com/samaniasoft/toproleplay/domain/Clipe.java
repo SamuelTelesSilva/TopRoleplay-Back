@@ -20,7 +20,7 @@ public class Clipe {
     private int coracao;
     private String urlImageCapa;
     private String urlImageCard;
-
+    private boolean twitch;
     
     @ManyToOne
     @JoinColumn(name = "streamer_id", nullable = false)
