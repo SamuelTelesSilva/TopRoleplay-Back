@@ -37,7 +37,6 @@ public class ClipeController {
         return ResponseEntity.ok(clipeService.getClipes(pageable));
     }
 
-
     @GetMapping("/search/{titulo}")
     public ResponseEntity searchClipeByTitle(
         @PathVariable("titulo") String titulo, Pageable pageable,
@@ -45,6 +44,13 @@ public class ClipeController {
         @RequestParam(value = "size", defaultValue = "5") Integer size
     ){
         return ResponseEntity.ok(clipeService.getClipeByTituloLike(titulo, PageRequest.of(page, size, Sort.by("id").descending())));
+    }
+
+
+    @GetMapping("/{id}")
+    public ResponseEntity getClipeById(@PathVariable("id") Long id){
+        ClipeDTO clipe = clipeService.getClipeById(id);
+        return ResponseEntity.ok(clipe);
     }
 
     // ---------------------Post--------------------------------------

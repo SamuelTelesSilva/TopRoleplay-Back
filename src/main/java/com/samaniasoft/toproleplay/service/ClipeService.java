@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import com.samaniasoft.toproleplay.domain.Clipe;
 import com.samaniasoft.toproleplay.dto.ClipeDTO;
+import com.samaniasoft.toproleplay.infra.exception.ObjectNotFoundException;
 import com.samaniasoft.toproleplay.repository.ClipeRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,11 @@ public class ClipeService {
 
     public Page<Clipe> getClipeByTituloLike(String titulo, Pageable pageable){
         return clipeRepository.searchByTituloLike(titulo, pageable);
+    }
+
+    public ClipeDTO getClipeById(Long id){
+        Optional<Clipe> clipe = clipeRepository.findById(id);
+        return clipe.map(ClipeDTO::create).orElseThrow(() -> new ObjectNotFoundException("Clipe não encontrado"));
     }
 
     // ---------------------Post------------------------------------
