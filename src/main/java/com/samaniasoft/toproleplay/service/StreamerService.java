@@ -5,7 +5,7 @@ import java.util.Optional;
 import com.samaniasoft.toproleplay.domain.Streamer;
 import com.samaniasoft.toproleplay.dto.StreamerDTO;
 import com.samaniasoft.toproleplay.repository.StreamerRepository;
-
+import com.samaniasoft.toproleplay.infra.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -27,6 +27,11 @@ public class StreamerService {
 
     public Page<Streamer> getStreamerByNameLike(String nome, Pageable pageable){
         return streamerRepository.searchByNameLike(nome, pageable);
+    }
+
+    public StreamerDTO getStreamerById(Long id){
+        Optional<Streamer> streamer = streamerRepository.findById(id);
+        return streamer.map(StreamerDTO::create).orElseThrow(() -> new ObjectNotFoundException("Streamer não encontrado"));
     }
 
     // ---------------------Post------------------------------------

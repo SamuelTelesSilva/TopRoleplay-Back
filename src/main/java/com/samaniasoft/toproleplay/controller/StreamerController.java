@@ -45,6 +45,12 @@ public class StreamerController {
         return ResponseEntity.ok(streamerService.getStreamerByNameLike(nome, PageRequest.of(page, size, Sort.by("id").descending())));
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity getStreamerById(@PathVariable("id") Long id){
+        StreamerDTO streamer = streamerService.getStreamerById(id);
+        return ResponseEntity.ok(streamer);
+    }
+
 
     // ---------------------Post--------------------------------------
     @PostMapping

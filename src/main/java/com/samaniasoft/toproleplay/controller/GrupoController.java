@@ -44,6 +44,12 @@ public class GrupoController {
         return ResponseEntity.ok(grupoService.getGroupByNameLike(nome, PageRequest.of(page, size, Sort.by("id").descending())));
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity getGrupoById(@PathVariable("id") Long id){
+        GrupoDTO grupo = grupoService.getGroupById(id);
+        return ResponseEntity.ok(grupo);
+    }
+
     // ---------------------Post--------------------------------------
     @PostMapping
     @Secured({"ROLE_ADMIN"})

@@ -16,6 +16,14 @@ public interface GrupoRepository extends JpaRepository<Grupo, Long>{
     @Query(value = "SELECT * FROM grupo WHERE nome LIKE %:nome% ", nativeQuery = true)
     Page<Grupo> searchByNameLike(@Param("nome") String nome, Pageable pageable);
 
+
+    //Pegar os lideres do grupo
+
+
+
+
+    //Pegar os membros do grupo
+
     //-------------------------------------------------------------------
     /**
      *  Métodos para realizar as associações entre Grupo e Líderes

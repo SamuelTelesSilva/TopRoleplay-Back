@@ -46,6 +46,12 @@ public class CidadeController {
         return ResponseEntity.ok(cidadeService.getCityByNameLike(nome, PageRequest.of(page, size, Sort.by("id").descending())));
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity getCityById(@PathVariable("id") Long id){
+        CidadeDTO cidade = cidadeService.getCityById(id);
+        return ResponseEntity.ok(cidade);
+    }
+
     // ---------------------Post--------------------------------------
     @PostMapping
     @Secured({"ROLE_ADMIN"})

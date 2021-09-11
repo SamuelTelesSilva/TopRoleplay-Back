@@ -5,7 +5,7 @@ import java.util.Optional;
 import com.samaniasoft.toproleplay.domain.Grupo;
 import com.samaniasoft.toproleplay.dto.GrupoDTO;
 import com.samaniasoft.toproleplay.repository.GrupoRepository;
-
+import com.samaniasoft.toproleplay.infra.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -26,6 +26,11 @@ public class GrupoService {
 
     public Page<Grupo> getGroupByNameLike(String nome, Pageable pageable){
         return grupoRepository.searchByNameLike(nome, pageable);
+    }
+
+    public GrupoDTO getGroupById(Long id){
+        Optional<Grupo> grupo = grupoRepository.findById(id);
+        return grupo.map(GrupoDTO::create).orElseThrow(() -> new ObjectNotFoundException("Grupo não encontrado"));
     }
 
     // ---------------------Post------------------------------------

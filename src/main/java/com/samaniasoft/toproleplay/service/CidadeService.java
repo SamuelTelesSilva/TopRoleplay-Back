@@ -5,7 +5,7 @@ import java.util.Optional;
 import com.samaniasoft.toproleplay.domain.Cidade;
 import com.samaniasoft.toproleplay.dto.CidadeDTO;
 import com.samaniasoft.toproleplay.repository.CidadeRepository;
-
+import com.samaniasoft.toproleplay.infra.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -27,6 +27,11 @@ public class CidadeService {
 
     public Page<Cidade> getCityByNameLike(String nome, Pageable pageable){
         return cidadeRepository.searchByNameLike(nome, pageable);
+    }
+
+    public CidadeDTO getCityById(Long id){
+        Optional<Cidade> cidade = cidadeRepository.findById(id);
+        return cidade.map(CidadeDTO::create).orElseThrow(() -> new ObjectNotFoundException("Cidade não encontrado"));
     }
 
     // ---------------------Post------------------------------------

@@ -21,6 +21,7 @@ public class StreamerDTO {
 
     private Long id;
     private String nome;
+    private int coracao;
     private String urlImageCapa;
     private String urlImageCard;
     private String urlFacebook;
