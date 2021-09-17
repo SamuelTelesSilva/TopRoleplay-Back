@@ -71,6 +71,7 @@ public class ClipeController {
 
     // ---------------------Update--------------------------------------
     @PutMapping("/{id}")
+    @Secured({"ROLE_ADMIN"})
     public ResponseEntity updateClipe(@PathVariable("id") Long id, @RequestBody Clipe clipe){
         ClipeDTO c = clipeService.update(clipe, id);
 
@@ -82,6 +83,7 @@ public class ClipeController {
 
     // ---------------------Delete--------------------------------------
     @DeleteMapping("/{id}")
+    @Secured({"ROLE_ADMIN"})
     public ResponseEntity delete(@PathVariable("id") Long id){
         clipeService.delete(id);
         return ResponseEntity.ok().build();

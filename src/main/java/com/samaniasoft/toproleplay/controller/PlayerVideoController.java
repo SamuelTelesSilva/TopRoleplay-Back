@@ -65,6 +65,7 @@ public class PlayerVideoController {
 
     // ---------------------Update--------------------------------------
     @PutMapping("/{id}")
+    @Secured({"ROLE_ADMIN"})
     public ResponseEntity updatePlayer(@PathVariable("id") Long id, @RequestBody PlayerVideo player){
         PlayerVideoDTO c = playerVideoService.update(player, id);
 
@@ -76,6 +77,7 @@ public class PlayerVideoController {
 
     // ---------------------Delete--------------------------------------
     @DeleteMapping("/{id}")
+    @Secured({"ROLE_ADMIN"})
     public ResponseEntity delete(@PathVariable("id") Long id){
         playerVideoService.delete(id);
         return ResponseEntity.ok().build();

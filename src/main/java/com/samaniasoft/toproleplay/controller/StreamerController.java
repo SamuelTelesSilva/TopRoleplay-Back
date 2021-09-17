@@ -71,6 +71,7 @@ public class StreamerController {
 
 
     @PostMapping("/cidadeid/{id_cidade}/streamerid/{id_streamer}")
+    @Secured({"ROLE_ADMIN"})
     public ResponseEntity saveCityStreamers(
         @PathVariable("id_cidade") Long id_cidade, 
         @PathVariable("id_streamer") Long id_streamer
@@ -83,6 +84,7 @@ public class StreamerController {
 
     // ---------------------Put--------------------------------------
     @PutMapping("/{id}")
+    @Secured({"ROLE_ADMIN"})
     public ResponseEntity put(@PathVariable("id") Long id, @RequestBody Streamer streamer) {
         streamer.setId(id);
         StreamerDTO c = streamerService.update(streamer, id);
@@ -97,6 +99,7 @@ public class StreamerController {
     @PutMapping(
         "/newcity/{idCidadeNew}/newstreamer/{idStreamerNew}/cidade/{idCidadeAtual}/streamer/{idStreamerAtual}"
     )
+    @Secured({"ROLE_ADMIN"})
     public ResponseEntity updateCityStreamers(
         @PathVariable("idCidadeNew") Long idCidadeNew, 
         @PathVariable("idStreamerNew") Long idStreamerNew,
@@ -110,11 +113,22 @@ public class StreamerController {
             idStreamerAtual);
         return ResponseEntity.ok().build();
     }
+
+
+    @PutMapping("/votar/{id}")
+    public ResponseEntity votacaoCoracao(@PathVariable("id") Long id) {
+        StreamerDTO s = streamerService.votacao(id);
+
+        return s != null ?
+                ResponseEntity.ok(s) :
+                ResponseEntity.notFound().build();
+    }
     
 
 
     // ---------------------Delete--------------------------------------
     @DeleteMapping("/{id}")
+    @Secured({"ROLE_ADMIN"})
     public ResponseEntity delete(@PathVariable("id") Long id){
         streamerService.delete(id);
         return ResponseEntity.ok().build();

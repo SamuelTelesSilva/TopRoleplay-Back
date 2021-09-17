@@ -66,6 +66,25 @@ public class CidadeService {
         }
     }
 
+
+    public CidadeDTO votacao(Long id){
+        Assert.notNull(id, "Não foi possível efetuar a votação");
+
+        Optional<Cidade> optional = cidadeRepository.findById(id);
+
+        if(optional.isPresent()){
+
+            Cidade db = optional.get();
+            db.setCoracao(db.getCoracao() + 5);
+            cidadeRepository.save(db);
+            return CidadeDTO.create(db);
+            
+        } else {
+            return null;
+            //throw new RuntimeException("Não foi possível atualizar o registro");
+        }
+    }
+
     // ---------------------Delete--------------------------------------
     @Transactional
     public ResponseEntity delete(Long id){

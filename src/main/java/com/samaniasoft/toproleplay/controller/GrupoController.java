@@ -46,9 +46,16 @@ public class GrupoController {
 
     @GetMapping("/{id}")
     public ResponseEntity getGrupoById(@PathVariable("id") Long id){
+        return ResponseEntity.ok(grupoService.getGroupById(id));
+    }
+
+    /*
+    @GetMapping("/{id}")
+    public ResponseEntity getGrupoById(@PathVariable("id") Long id){
         GrupoDTO grupo = grupoService.getGroupById(id);
         return ResponseEntity.ok(grupo);
     }
+    */
 
     // ---------------------Post--------------------------------------
     @PostMapping
@@ -68,6 +75,7 @@ public class GrupoController {
 
 
     @PostMapping("/{id}/lider/{idStreamer}")
+    @Secured({"ROLE_ADMIN"})
     public ResponseEntity saveLeaderGroup(
         @PathVariable("id") Long id, 
         @PathVariable("idStreamer") Long idStreamer
@@ -77,6 +85,7 @@ public class GrupoController {
     }
 
     @PostMapping("/{id}/membro/{idStreamer}")
+    @Secured({"ROLE_ADMIN"})
     public ResponseEntity saveMemberGroup(
         @PathVariable("id") Long id, 
         @PathVariable("idStreamer") Long idStreamer
@@ -86,6 +95,7 @@ public class GrupoController {
     }
 
     @PostMapping("/{id}/cidade/{idCidade}")
+    @Secured({"ROLE_ADMIN"})
     public ResponseEntity saveCityGroup(
         @PathVariable("id") Long id, 
         @PathVariable("idCidade") Long idCidade
@@ -107,15 +117,26 @@ public class GrupoController {
                 ResponseEntity.notFound().build();
     }
 
+    @PutMapping("/votar/{id}")
+    public ResponseEntity putVotacao(@PathVariable("id") Long id) {
+
+        GrupoDTO g = grupoService.votacao(id);
+
+        return g != null ?
+                ResponseEntity.ok(g) :
+                ResponseEntity.notFound().build();
+    }
 
     // ---------------------Delete--------------------------------------
     @DeleteMapping("/{id}")
+    @Secured({"ROLE_ADMIN"})
     public ResponseEntity deleteAllGrupo(@PathVariable("id") Long id){
         grupoService.deleteAllByGroupId(id);
         return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/{id_grupo}/lider/{id_streamer}")
+    @Secured({"ROLE_ADMIN"})
     public ResponseEntity deleteLeader(
         @PathVariable("id_grupo") Long id_grupo, @PathVariable("id_streamer") Long id_streamer
     ){
@@ -124,6 +145,7 @@ public class GrupoController {
     }
 
     @DeleteMapping("/{id_grupo}/membro/{id_streamer}")
+    @Secured({"ROLE_ADMIN"})
     public ResponseEntity deleteMember(
         @PathVariable("id_grupo") Long id_grupo, @PathVariable("id_streamer") Long id_streamer
     ){
@@ -132,6 +154,7 @@ public class GrupoController {
     }
 
     @DeleteMapping("/{id_grupo}/cidade/{id_cidade}")
+    @Secured({"ROLE_ADMIN"})
     public ResponseEntity deleteCity(
         @PathVariable("id_grupo") Long id_grupo, @PathVariable("id_cidade") Long id_cidade
     ){

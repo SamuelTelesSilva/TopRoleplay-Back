@@ -1,5 +1,6 @@
 package com.samaniasoft.toproleplay.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import com.samaniasoft.toproleplay.domain.Grupo;
@@ -28,10 +29,16 @@ public class GrupoService {
         return grupoRepository.searchByNameLike(nome, pageable);
     }
 
+    public List<Grupo> getGroupById(Long id_grupo){
+        return grupoRepository.getGroupByIdModified(id_grupo);
+    }
+
+    /*
     public GrupoDTO getGroupById(Long id){
         Optional<Grupo> grupo = grupoRepository.findById(id);
         return grupo.map(GrupoDTO::create).orElseThrow(() -> new ObjectNotFoundException("Grupo não encontrado"));
     }
+    */
 
     // ---------------------Post------------------------------------
     public GrupoDTO insert(Grupo grupo) {
@@ -79,6 +86,24 @@ public class GrupoService {
         }
 
     }
+
+    public GrupoDTO votacao(Long id){
+        Assert.notNull(id, "Não foi possível efetuar a votação");
+
+        Optional<Grupo> optional = grupoRepository.findById(id);
+
+        if(optional.isPresent()){
+            Grupo db = optional.get();
+            db.setCoracao( db.getCoracao() + 5);
+            
+            grupoRepository.save(db);
+            return GrupoDTO.create(db);
+        }else{
+            return null;
+        }
+
+    }
+
 
     // ---------------------Delete------------------------------------
     @Transactional

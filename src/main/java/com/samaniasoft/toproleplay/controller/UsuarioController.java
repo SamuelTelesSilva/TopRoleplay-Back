@@ -68,6 +68,7 @@ public class UsuarioController {
 
     // ---------------------Delete--------------------------------------
     @DeleteMapping("/delete/{id}")
+    @Secured({"ROLE_ADMIN"})
     public ResponseEntity<Object> deleteUser(@PathVariable Long id) {
         return usuarioService.deleteUser(id);
     }

@@ -76,6 +76,28 @@ public class StreamerService {
         }
     }
 
+
+    public StreamerDTO votacao(Long id) {
+        Assert.notNull(id,"Não foi possível atualizar o registro");
+
+        // Busca o streamer no banco de dados
+        Optional<Streamer> optional = streamerRepository.findById(id);
+
+        if(optional.isPresent()) {
+            Streamer db = optional.get();
+
+            db.setCoracao(db.getCoracao() + 5);
+            
+            // Atualiza o streamer
+            streamerRepository.save(db);
+
+            return StreamerDTO.create(db);
+        } else {
+            return null;
+            //throw new RuntimeException("Não foi possível atualizar o registro");
+        }
+    }
+
     /**
      * Update da associação cidade_streamer
      * @param idCidadeNew

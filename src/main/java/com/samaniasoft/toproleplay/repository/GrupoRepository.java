@@ -1,5 +1,7 @@
 package com.samaniasoft.toproleplay.repository;
 
+import java.util.List;
+
 import com.samaniasoft.toproleplay.domain.Grupo;
 
 import org.springframework.data.domain.Page;
@@ -17,12 +19,15 @@ public interface GrupoRepository extends JpaRepository<Grupo, Long>{
     Page<Grupo> searchByNameLike(@Param("nome") String nome, Pageable pageable);
 
 
-    //Pegar os lideres do grupo
-
+    //Pegar o grupo por id, metodo semelhante ao nativo do jpa
+    @Query(value = "SELECT * FROM grupo gm WHERE gm.id = :id", nativeQuery = true)
+    List<Grupo> getGroupByIdModified(@Param("id") Long id);
 
 
 
     //Pegar os membros do grupo
+
+
 
     //-------------------------------------------------------------------
     /**

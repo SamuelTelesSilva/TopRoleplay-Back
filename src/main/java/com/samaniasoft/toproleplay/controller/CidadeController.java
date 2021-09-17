@@ -70,6 +70,7 @@ public class CidadeController {
 
     // ---------------------Update--------------------------------------
     @PutMapping("/{id}")
+    @Secured({"ROLE_ADMIN"})
     public ResponseEntity updateCity(@PathVariable("id") Long id, @RequestBody Cidade cidade){
         CidadeDTO c = cidadeService.update(cidade, id);
 
@@ -78,8 +79,18 @@ public class CidadeController {
             ResponseEntity.notFound().build();
     }
 
+    @PutMapping("/votar/{id}")
+    public ResponseEntity putVotacao(@PathVariable("id") Long id){
+        CidadeDTO c = cidadeService.votacao(id);
+
+        return c != null ?
+            ResponseEntity.ok(c) :
+            ResponseEntity.notFound().build();
+    }
+
     // ---------------------Delete--------------------------------------
     @DeleteMapping("/{id}")
+    @Secured({"ROLE_ADMIN"})
     public ResponseEntity delete(@PathVariable("id") Long id){
         cidadeService.delete(id);
         return ResponseEntity.ok().build();
