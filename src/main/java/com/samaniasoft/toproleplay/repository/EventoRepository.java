@@ -6,11 +6,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import com.samaniasoft.toproleplay.domain.PlayerVideo;
+import com.samaniasoft.toproleplay.domain.Evento;
 
-public interface PlayerVideoRepository extends JpaRepository<PlayerVideo, Long>{
+public interface EventoRepository extends JpaRepository<Evento, Long>{
 
     //Para pesquisar pelo titulo
-    @Query(value = "SELECT * FROM playerVideo WHERE titulo LIKE %:titulo% ", nativeQuery = true)
-    Page<PlayerVideo> searchByTituloLike(@Param("titulo") String titulo, Pageable pageable);
+    @Query(value = "SELECT * FROM evento WHERE titulo LIKE %:titulo% ", nativeQuery = true)
+    Page<Evento> searchByTituloLike(@Param("titulo") String titulo, Pageable pageable);
 }

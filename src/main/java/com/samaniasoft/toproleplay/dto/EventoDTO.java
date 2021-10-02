@@ -2,11 +2,11 @@ package com.samaniasoft.toproleplay.dto;
 
 import lombok.Data;
 import org.modelmapper.ModelMapper;
-import com.samaniasoft.toproleplay.domain.PlayerVideo;
+import com.samaniasoft.toproleplay.domain.Evento;
 
 
 @Data
-public class PlayerVideoDTO {
+public class EventoDTO {
 
     private Long id;
     private String titulo;
@@ -18,9 +18,9 @@ public class PlayerVideoDTO {
     private String urlImgCard;
 
 
-    public static PlayerVideoDTO create(PlayerVideo player) {
+    public static EventoDTO create(Evento player) {
         ModelMapper modelMapper = new ModelMapper();
-        return modelMapper.map(player, PlayerVideoDTO.class);
+        return modelMapper.map(player, EventoDTO.class);
     }
     
 }

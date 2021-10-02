@@ -2,9 +2,9 @@ package com.samaniasoft.toproleplay.controller;
 
 import java.net.URI;
 
-import com.samaniasoft.toproleplay.domain.PlayerVideo;
-import com.samaniasoft.toproleplay.dto.PlayerVideoDTO;
-import com.samaniasoft.toproleplay.service.PlayerVideoService;
+import com.samaniasoft.toproleplay.domain.Evento;
+import com.samaniasoft.toproleplay.dto.EventoDTO;
+import com.samaniasoft.toproleplay.service.EventoService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -25,34 +25,39 @@ import org.springframework.data.domain.Sort;
 
 
 @RestController
-@RequestMapping("/api/playervideo")
-public class PlayerVideoController {
+@RequestMapping("/api/evento")
+public class EventoController {
     
     @Autowired
-    PlayerVideoService playerVideoService;
+    EventoService eventoService;
 
     // ---------------------GET--------------------------------------
     @GetMapping
-    public ResponseEntity getLinkPlayer(Pageable pageable){
-        return ResponseEntity.ok(playerVideoService.getLinkPlayer(pageable));
+    public ResponseEntity getLinkEvento(Pageable pageable){
+        return ResponseEntity.ok(eventoService.getLinkEvento(pageable));
     }
 
-
     @GetMapping("/search/{titulo}")
-    public ResponseEntity searchPlayerByTitle(
+    public ResponseEntity searchEventoByTitle(
         @PathVariable("titulo") String titulo, Pageable pageable,
         @RequestParam(value = "page", defaultValue = "0") Integer page,
         @RequestParam(value = "size", defaultValue = "5") Integer size
     ){
-        return ResponseEntity.ok(playerVideoService.getLinkPlayerTitle(titulo, PageRequest.of(page, size, Sort.by("id").descending())));
+        return ResponseEntity.ok(eventoService.getLinkEventoTitle(titulo, PageRequest.of(page, size, Sort.by("id").descending())));
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity getEventoById(@PathVariable("id") Long id){
+        EventoDTO evento = eventoService.getEventoById(id);
+        return ResponseEntity.ok(evento);
     }
 
     // ---------------------Post--------------------------------------
     @PostMapping
     @Secured({"ROLE_ADMIN"})
-    public ResponseEntity adicionarPlayer(@RequestBody PlayerVideo player) {
+    public ResponseEntity adicionarEvento(@RequestBody Evento evento) {
 
-        PlayerVideoDTO p = playerVideoService.insert(player);
+        EventoDTO p = eventoService.insert(evento);
 
         URI location = getUri(p.getId());
         return ResponseEntity.created(location).build();
@@ -66,8 +71,8 @@ public class PlayerVideoController {
     // ---------------------Update--------------------------------------
     @PutMapping("/{id}")
     @Secured({"ROLE_ADMIN"})
-    public ResponseEntity updatePlayer(@PathVariable("id") Long id, @RequestBody PlayerVideo player){
-        PlayerVideoDTO c = playerVideoService.update(player, id);
+    public ResponseEntity updateEvento(@PathVariable("id") Long id, @RequestBody Evento evento){
+        EventoDTO c = eventoService.update(evento, id);
 
         return c != null ?
             ResponseEntity.ok(c) :
@@ -79,7 +84,7 @@ public class PlayerVideoController {
     @DeleteMapping("/{id}")
     @Secured({"ROLE_ADMIN"})
     public ResponseEntity delete(@PathVariable("id") Long id){
-        playerVideoService.delete(id);
+        eventoService.delete(id);
         return ResponseEntity.ok().build();
     }
 
