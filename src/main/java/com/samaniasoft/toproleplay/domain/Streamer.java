@@ -41,6 +41,18 @@ public class Streamer{
     @JsonIgnore
     @OneToMany(mappedBy = "streamer")
     private List<Clipe> clipes;
+
+
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name="eventoLadoA_id")
+    private Evento eventoLadoA;
+
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name="eventoLadoB_id")
+    private Evento eventoLadoB;
+    
         
 }
 //@OneToMany(mappedBy = "streamer")

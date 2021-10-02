@@ -8,6 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 
 @Entity
@@ -24,5 +26,11 @@ public class Evento {
     private String urlVideo4;
     private String urlImgCapa;
     private String urlImgCard;
+
+    @OneToMany(mappedBy="eventoLadoA")
+    private List<Streamer> streamersLadoA;
+
+    @OneToMany(mappedBy="eventoLadoB")
+    private List<Streamer> streamersLadoB;
     
 }

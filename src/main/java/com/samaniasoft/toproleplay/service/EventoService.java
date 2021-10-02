@@ -4,13 +4,14 @@ import java.util.Optional;
 
 import com.samaniasoft.toproleplay.domain.Evento;
 import com.samaniasoft.toproleplay.dto.EventoDTO;
+import com.samaniasoft.toproleplay.infra.exception.ObjectNotFoundException;
 import com.samaniasoft.toproleplay.repository.EventoRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
-import com.samaniasoft.toproleplay.infra.exception.ObjectNotFoundException;
 
 
 @Service

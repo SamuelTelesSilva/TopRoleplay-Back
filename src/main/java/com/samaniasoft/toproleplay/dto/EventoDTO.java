@@ -2,7 +2,14 @@ package com.samaniasoft.toproleplay.dto;
 
 import lombok.Data;
 import org.modelmapper.ModelMapper;
+
+import java.util.List;
+
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.samaniasoft.toproleplay.domain.Evento;
+import com.samaniasoft.toproleplay.domain.Streamer;
 
 
 @Data
@@ -16,6 +23,12 @@ public class EventoDTO {
     private String urlVideo4;
     private String urlImgCapa;
     private String urlImgCard;
+
+    @OneToMany(mappedBy="eventoLadoA")
+    private List<StreamerDTO> streamersLadoA;
+
+    @OneToMany(mappedBy="eventoLadoB")
+    private List<StreamerDTO> streamersLadoB;
 
 
     public static EventoDTO create(Evento player) {

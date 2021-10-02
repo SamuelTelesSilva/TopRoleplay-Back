@@ -2,8 +2,9 @@ package com.samaniasoft.toproleplay.dto;
 
 import java.util.List;
 
-
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -44,6 +45,17 @@ public class StreamerDTO {
     @JsonIgnore
     @ManyToMany(mappedBy = "membros")
     private List<Grupo> participa;
+
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name="eventoLadoA_id")
+    private EventoDTO eventoLadoA;
+
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name="eventoLadoB_id")
+    private EventoDTO eventoLadoB;
+
 
     public static StreamerDTO create(Streamer streamer) {
         ModelMapper modelMapper = new ModelMapper();
