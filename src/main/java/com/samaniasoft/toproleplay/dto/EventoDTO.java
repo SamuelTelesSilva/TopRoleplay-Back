@@ -2,14 +2,9 @@ package com.samaniasoft.toproleplay.dto;
 
 import lombok.Data;
 import org.modelmapper.ModelMapper;
-
 import java.util.List;
-
 import javax.persistence.OneToMany;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.samaniasoft.toproleplay.domain.Evento;
-import com.samaniasoft.toproleplay.domain.Streamer;
 
 
 @Data
