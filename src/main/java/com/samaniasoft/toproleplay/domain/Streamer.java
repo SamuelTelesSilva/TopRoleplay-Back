@@ -52,6 +52,16 @@ public class Streamer{
     @ManyToOne
     @JoinColumn(name="eventoLadoB_id")
     private Evento eventoLadoB;
+
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name="rankingPvp_id")
+    private Ranking rankingPvp;
+
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name="rankingRP_id")
+    private Ranking rankingRP;
     
         
 }

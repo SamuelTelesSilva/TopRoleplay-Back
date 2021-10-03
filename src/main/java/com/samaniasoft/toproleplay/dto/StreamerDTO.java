@@ -56,6 +56,16 @@ public class StreamerDTO {
     @JoinColumn(name="eventoLadoB_id")
     private EventoDTO eventoLadoB;
 
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name="rankingPvp_id")
+    private RankingDTO rankingPvp;
+
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name="rankingRP_id")
+    private RankingDTO rankingRP;
+
 
     public static StreamerDTO create(Streamer streamer) {
         ModelMapper modelMapper = new ModelMapper();

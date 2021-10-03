@@ -1,9 +1,12 @@
 package com.samaniasoft.toproleplay.domain;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import lombok.Data;
 
@@ -21,6 +24,12 @@ public class Ranking {
     private String urlImgCapa;
     private String urlImgCard;
 
+
+    @OneToMany(mappedBy="rankingPvp")
+    private List<Streamer> melhoresPvp;
+
+    @OneToMany(mappedBy="rankingRP")
+    private List<Streamer> melhoresRp;
 
 
 
