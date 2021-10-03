@@ -25,6 +25,10 @@ public class StreamerService {
         return streamerRepository.findAll(pageable);
     }
 
+    public Page<Streamer> getTopStreamers(Pageable pageable){
+        return streamerRepository.findAll(pageable);
+    }
+
     public Page<Streamer> getStreamerByNameLike(String nome, Pageable pageable){
         return streamerRepository.searchByNameLike(nome, pageable);
     }

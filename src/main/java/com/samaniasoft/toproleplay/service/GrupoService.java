@@ -25,6 +25,10 @@ public class GrupoService {
         return grupoRepository.findAll(pageable);
     }
 
+    public Page<Grupo> getTopGrupos(Pageable pageable){
+        return grupoRepository.findAll(pageable);
+    }
+
     public Page<Grupo> getGroupByNameLike(String nome, Pageable pageable){
         return grupoRepository.searchByNameLike(nome, pageable);
     }

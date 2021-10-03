@@ -36,6 +36,16 @@ public class StreamerController {
         return ResponseEntity.ok(streamerService.getStreamers(pageable));
     }
 
+    //top 10
+    @GetMapping("/top")
+    public ResponseEntity getTopStreamers(
+        Pageable pageable,
+        @RequestParam(value = "page", defaultValue = "0") Integer page,
+        @RequestParam(value = "size", defaultValue = "10") Integer size
+    ){
+        return ResponseEntity.ok(streamerService.getTopStreamers(PageRequest.of(page, size, Sort.by("coracao").descending())));
+    }
+
     @GetMapping("/search/{nome}")
     public ResponseEntity searchStreamerByName(
         @PathVariable("nome") String nome, Pageable pageable,

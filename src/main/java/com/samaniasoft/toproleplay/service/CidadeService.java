@@ -25,6 +25,10 @@ public class CidadeService {
         return cidadeRepository.findAll(pageable);
     }
 
+    public Page<Cidade> getTopCidades(Pageable pageable){
+        return cidadeRepository.findAll(pageable);
+    }
+
     public Page<Cidade> getCityByNameLike(String nome, Pageable pageable){
         return cidadeRepository.searchByNameLike(nome, pageable);
     }

@@ -15,6 +15,8 @@ public interface StreamerRepository extends JpaRepository<Streamer, Long>{
     @Query(value = "SELECT * FROM streamer WHERE nome LIKE %:nome% ", nativeQuery = true)
     Page<Streamer> searchByNameLike(@Param("nome") String nome, Pageable pageable);
 
+
+
     //Metodo para fazer o post na tabela cidade_streamer
     @Modifying
     @Query( value = "INSERT INTO cidade_streamers (id_cidade, id_streamer) VALUES ( :id_cidade, :id_streamer)", nativeQuery= true)
@@ -64,7 +66,7 @@ public interface StreamerRepository extends JpaRepository<Streamer, Long>{
 
 
 
-
+//SELECT * FROM streamer ORDER BY streamer.coracao DESC LIMIT 10
 
     
 }

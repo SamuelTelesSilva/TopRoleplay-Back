@@ -46,6 +46,16 @@ public class CidadeController {
         return ResponseEntity.ok(cidadeService.getCityByNameLike(nome, PageRequest.of(page, size, Sort.by("id").descending())));
     }
 
+
+    @GetMapping("/top")
+    public ResponseEntity getTopCity(
+        Pageable pageable,
+        @RequestParam(value = "page", defaultValue = "0") Integer page,
+        @RequestParam(value = "size", defaultValue = "10") Integer size
+    ){
+        return ResponseEntity.ok(cidadeService.getTopCidades(PageRequest.of(page, size, Sort.by("coracao").descending())));
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity getCityById(@PathVariable("id") Long id){
         CidadeDTO cidade = cidadeService.getCityById(id);
