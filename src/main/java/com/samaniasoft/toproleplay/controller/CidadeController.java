@@ -6,7 +6,6 @@ import com.samaniasoft.toproleplay.domain.Cidade;
 import com.samaniasoft.toproleplay.dto.CidadeDTO;
 import com.samaniasoft.toproleplay.service.CidadeService;
 import org.springframework.data.domain.PageRequest;
-import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;

@@ -12,7 +12,7 @@ import org.springframework.data.repository.query.Param;
 public interface StreamerRepository extends JpaRepository<Streamer, Long>{
 
     //Para pesquisar pelo nome
-    @Query(value = "SELECT * FROM streamer WHERE nome LIKE %:nome% ", nativeQuery = true)
+    @Query(value = "SELECT * FROM Streamer WHERE nome LIKE %:nome% ", nativeQuery = true)
     Page<Streamer> searchByNameLike(@Param("nome") String nome, Pageable pageable);
 
 

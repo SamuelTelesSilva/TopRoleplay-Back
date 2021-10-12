@@ -6,7 +6,6 @@ import java.util.Optional;
 import com.samaniasoft.toproleplay.domain.Grupo;
 import com.samaniasoft.toproleplay.dto.GrupoDTO;
 import com.samaniasoft.toproleplay.repository.GrupoRepository;
-import com.samaniasoft.toproleplay.infra.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

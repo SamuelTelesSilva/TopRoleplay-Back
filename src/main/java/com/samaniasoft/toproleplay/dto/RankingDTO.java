@@ -1,10 +1,7 @@
 package com.samaniasoft.toproleplay.dto;
 
 import java.util.List;
-
-import javax.persistence.Entity;
 import javax.persistence.OneToMany;
-
 import com.samaniasoft.toproleplay.domain.Ranking;
 import org.modelmapper.ModelMapper;
 import lombok.Data;

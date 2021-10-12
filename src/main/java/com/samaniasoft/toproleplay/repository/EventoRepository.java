@@ -11,6 +11,6 @@ import com.samaniasoft.toproleplay.domain.Evento;
 public interface EventoRepository extends JpaRepository<Evento, Long>{
 
     //Para pesquisar pelo titulo
-    @Query(value = "SELECT * FROM evento WHERE titulo LIKE %:titulo% ", nativeQuery = true)
+    @Query(value = "SELECT * FROM Evento WHERE titulo LIKE %:titulo% ", nativeQuery = true)
     Page<Evento> searchByTituloLike(@Param("titulo") String titulo, Pageable pageable);
 }

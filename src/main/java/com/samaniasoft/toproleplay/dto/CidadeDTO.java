@@ -1,13 +1,7 @@
 package com.samaniasoft.toproleplay.dto;
 
-import java.util.List;
-
 import com.samaniasoft.toproleplay.domain.Cidade;
-import com.samaniasoft.toproleplay.domain.Grupo;
-import com.samaniasoft.toproleplay.domain.Streamer;
-
 import org.modelmapper.ModelMapper;
-
 import lombok.Data;
 
 @Data

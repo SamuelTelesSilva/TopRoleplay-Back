@@ -29,7 +29,7 @@ public class Grupo {
 
     @ManyToMany
     @JoinTable(
-        name = "Grupo_Lideres",
+        name = "grupo_lideres",
         uniqueConstraints = @UniqueConstraint(columnNames = {"id_streamer", "id_grupo"}),
         joinColumns = @JoinColumn(name = "id_grupo", referencedColumnName = "id"),
         inverseJoinColumns = @JoinColumn(name = "id_streamer", referencedColumnName = "id")
@@ -38,7 +38,7 @@ public class Grupo {
 
     @ManyToMany
     @JoinTable(
-        name = "Grupo_Membros",
+        name = "grupo_membros",
         uniqueConstraints = @UniqueConstraint(columnNames = {"id_streamer", "id_grupo"}),
         joinColumns = @JoinColumn(name = "id_grupo", referencedColumnName = "id"),
         inverseJoinColumns = @JoinColumn(name = "id_streamer", referencedColumnName = "id")

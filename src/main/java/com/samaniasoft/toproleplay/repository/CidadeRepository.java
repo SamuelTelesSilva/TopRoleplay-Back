@@ -12,7 +12,7 @@ import org.springframework.data.repository.query.Param;
 public interface CidadeRepository extends JpaRepository<Cidade, Long>{
 
     //Para pesquisar pelo nome
-    @Query(value = "SELECT * FROM cidade WHERE nome LIKE %:nome% ", nativeQuery = true)
+    @Query(value = "SELECT * FROM Cidade WHERE nome LIKE %:nome% ", nativeQuery = true)
     Page<Cidade> searchByNameLike(@Param("nome") String nome, Pageable pageable);
 
     //Removendo a cidade da relação

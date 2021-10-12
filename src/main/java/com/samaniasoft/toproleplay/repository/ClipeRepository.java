@@ -12,6 +12,6 @@ import org.springframework.data.domain.Page;
 public interface ClipeRepository extends JpaRepository<Clipe, Long>{
 
     //Para pesquisar pelo nome
-    @Query(value = "SELECT * FROM clipe WHERE titulo LIKE %:titulo% ", nativeQuery = true)
+    @Query(value = "SELECT * FROM Clipe WHERE titulo LIKE %:titulo% ", nativeQuery = true)
     Page<Clipe> searchByTituloLike(@Param("titulo") String titulo, Pageable pageable);
 }

@@ -15,12 +15,12 @@ public interface GrupoRepository extends JpaRepository<Grupo, Long>{
     
 
     //Para pesquisar pelo nome
-    @Query(value = "SELECT * FROM grupo WHERE nome LIKE %:nome% ", nativeQuery = true)
+    @Query(value = "SELECT * FROM Grupo WHERE nome LIKE %:nome% ", nativeQuery = true)
     Page<Grupo> searchByNameLike(@Param("nome") String nome, Pageable pageable);
 
 
     //Pegar o grupo por id, metodo semelhante ao nativo do jpa
-    @Query(value = "SELECT * FROM grupo gm WHERE gm.id = :id", nativeQuery = true)
+    @Query(value = "SELECT * FROM Grupo gm WHERE gm.id = :id", nativeQuery = true)
     List<Grupo> getGroupByIdModified(@Param("id") Long id);
 
 
